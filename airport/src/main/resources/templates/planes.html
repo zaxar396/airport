@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Planes</title>
+</head>
+<body>
+<h1>Planes</h1>
+<div th:each="el: ${planes}">
+    <h3 th:text="${el.id}"/>
+    <p th:text="${el.description}"/>
+    <p th:text="${el.maxSpeed}"/>
+</div>
+
+</body>
+</html>
