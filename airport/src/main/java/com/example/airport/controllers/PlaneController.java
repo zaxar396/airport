@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Set;
 
 @Controller
-public class PlaneController {
+public class PlaneController implements AbstractController<Plane> {
     private PlaneRepository planeRepository;
 
     private EntityManagerFactory entityManagerFactory;
@@ -79,9 +79,11 @@ public class PlaneController {
         return "plane-add";
     }
     @PostMapping("/planes/add")
-    public String addPostPlane(@RequestParam Long id, @RequestParam String description, @RequestParam Integer maxSpeed){
-        Plane plane = new Plane(id, description, maxSpeed);
+    public String addPostPlane(Model model, @RequestParam String description, @RequestParam Integer maxSpeed){
+        Plane plane = new Plane(description, maxSpeed);
         planeRepository.save(plane);
-        return "redirect:/planes";
+        Iterable<Plane> planes = planeRepository.findAll();
+        model.addAttribute("planes", planes);
+         return "planes";
     }
 }
